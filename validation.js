@@ -41,19 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form from submitting normally
-
-        
         let isValid = true;
         
         // Input fields
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
-        const role = document.getElementById("role").value;
+        const password = document.getElementById("password").value;
         
         // Error message elements
         const nameError = document.getElementById("nameError");
         const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
         
         // Name Validation
         if (name.trim().length < 3) {
@@ -73,19 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Password Validation
-        const passwordError = document.getElementById("passwordError");
-        if (passwordInput.value.trim().length === 0) {
+        if (password.trim().length === 0) {
             passwordError.style.display = "block";
             isValid = false;
         } else {
             passwordError.style.display = "none";
         }
         
-        if (isValid) {
-            // Form is valid based on frontend checks.
-            // Allow the form to submit to the backend PHP script.
-            form.submit();
+        if (!isValid) {
+            event.preventDefault();
         }
+        // If valid, form submits naturally with all data
     });
 });
 
